@@ -3,39 +3,48 @@
 
 {% block content %}
 
-    <div class="row ">
+    {% if user.is_authenticated %}
 
-        <div class="col s3">
-            <div class="card z-depth-4">
-                <div class="card-title light-blue accent-4 darken-1 z-depth-2 center-align valign-wrapper white-text">
-                    <div class="container">Card Title</div>
-                </div>
-                <div class="card-content black-text grey lighten-4 valign-wrapper">
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
-                </div>
-            </div>
-        </div>
+    {% else %}
 
-        <div class "col s3">
-            <ul class="collapsible transparent z-depth-0">
-                <li>
-                    <div class="collapsible-header">First</div>
-                    <div class="collapsible-body">Test</div>
-                </li>
-            </ul>
-        </div>
-        <div class "col s3">
-            <ul class="collapsible transparent z-depth-0">
-                <li>
-                    <div class="collapsible-header">First</div>
-                    <div class="collapsible-body">Test</div>
-                </li>
-            </ul>
-        </div>
-        
-    </div>
+    {% endif %}
 
-
-
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header">First</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">Second</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">Third</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header">First</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">Second</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">Third</div>
+                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>   
+    </table>
 {% endblock %}
