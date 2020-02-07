@@ -2,8 +2,38 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
+from .models import ToDo
 
 def index(request):
+    if request.user.is_authenticated:
+        currentuser = request.user.get_username()
+        usertodos = ToDo.objects.filter(username=currentuser)
+        if usertodos is not None:
+            
+            categories = set()
+            test = repr(usertodos)
+
+            for task in usertodos.all():
+                categories.add(task.todo_category)
+
+            
+            ## Render for users with todos ##
+            return render(
+                request,
+                'main/index.html',
+                context = {
+                    "todos":usertodos,
+                    "categories":categories,
+                }
+            )
+        else:
+            ## Render for users to add todos ##
+            return render(
+                request,
+                'main/index.html'
+            )
+
+    ## Default Render for non Users ##
     return render(
         request,
         'main/index.html'
