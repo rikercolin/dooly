@@ -12,12 +12,18 @@ def index(request):
 
         ## Creating/Editing todos
         if request.method == 'POST':
-            messages.success(request, "POST recieved!")
-            form = ToDoForm(request.POST, prefix='TodoForm')
-            messages.success(request, form.has_error)
+            form = ToDoForm(request.POST)
+
+            data = {
+                'username':currentuser,
+                'label':form.data.get('label'),
+                'category':form.data.get('category'),
+                'details':form.data.get('details'),
+            }
+
+            form = ToDoForm(data)
             if form.is_valid():
                 todo = form.save(commit=False)
-                todo.username = currentuser
                 todo.save(todo)
 
                 return redirect("main:index")

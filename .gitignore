@@ -1,2 +1,3 @@
 *.sqlite3
 main/migrations/
+main/__pycache__/
