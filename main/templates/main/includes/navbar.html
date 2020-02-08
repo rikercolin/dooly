@@ -1,15 +1,15 @@
 <nav>
     <div class="nav-wrapper blue-grey z-depth-2">
-        
+
         <a href="#" class="brand-logo right">Dooly</a>
-        
+
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="/"><i class="fas fa-home fa-sm"></i>  Home</a></li>
+            <li><a href="/"><i class="fas fa-home fa-sm"></i> Home</a></li>
             {% if user.is_authenticated %}
-                <li><a href="/account"><i class="fas fa-user fa-sm"></i>  Account</a></li>
-                <li><a href="/logout">Logout</a></li>
+            <li><a href="/account"><i class="fas fa-user fa-sm"></i> Account</a></li>
+            <li><a href="/logout">Logout</a></li>
             {% else %}
-                <li><a href="/login">Login/Register</a></li>
+            <li><a href="/login">Login/Register</a></li>
             {% endif %}
         </ul>
     </div>

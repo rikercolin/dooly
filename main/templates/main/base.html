@@ -3,51 +3,56 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <title>The HTML5 Herald</title>
-    
+
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script src="https://kit.fontawesome.com/3e98a2262b.js" crossorigin="anonymous"></script>
-  
+
 </head>
+
 <body>
-<!-- BODY -->
+    <!-- BODY -->
     <!-- MESSAGE HANDLING -->
     {% include "main/includes/messages.html" %}
     {% include "main/includes/navbar.html" %}
 
-        <div class="container">
-            {% block content%}
-            {% endblock %}
-        </div>
+    <div class="container">
+        {% block content%}
+        {% endblock %}
+    </div>
     </div>
 </body>
 
-<script> M.AutoInit(); </script>
+<script>
+    M.AutoInit();
+</script>
 <script>
     var coll = document.getElementsByClassName("collapsible2");
     var i;
 
     for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
     }
 </script>
+
 </html>

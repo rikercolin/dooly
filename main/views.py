@@ -9,14 +9,13 @@ def index(request):
         currentuser = request.user.get_username()
         usertodos = ToDo.objects.filter(username=currentuser)
         if usertodos is not None:
-            
+
             categories = set()
-            test = repr(usertodos)
 
             for task in usertodos.all():
                 categories.add(task.todo_category)
 
-            
+
             ## Render for users with todos ##
             return render(
                 request,
@@ -49,7 +48,7 @@ def login_request(request):
     ## Form Handling ##
     if request.method == "POST":
         registerform = UserCreationForm(request.POST, prefix='register')
-        if registerform.is_valid(): 
+        if registerform.is_valid():
             user = registerform.save()
             username = registerform.cleaned_data.get('username')
             messages.success(request, f"New Account Created: {username}")
@@ -57,7 +56,7 @@ def login_request(request):
             return redirect("main:index")
     else:
         registerform = UserCreationForm(prefix='register')
-        
+
     if request.method == "POST" and not registerform.is_valid():
         loginform = AuthenticationForm(data=request.POST, prefix='login')
 
@@ -66,7 +65,7 @@ def login_request(request):
             username = loginform.cleaned_data.get('username')
             password = loginform.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            
+
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Your logged in as: {username}")

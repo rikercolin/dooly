@@ -12,4 +12,4 @@ class ToDo(models.Model):
     def __str__(self):
         name = self.username + ": " + self.todo_name
         return name
-    
+

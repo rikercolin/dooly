@@ -3,60 +3,62 @@
 
 {% block content %}
 
-    {% if user.is_authenticated %}
-        
-        <!-- Display Todos -->
-        <table>
-        {% for cat in categories %}
-            <td>
-            <div class="card-panel blue-grey lighten-2 z-depth-2 white-text">
-                <h5 class="center">{{cat}}</h5>
-            </div>
-            <ul class="collapsible borderless popout">
+{% if user.is_authenticated %}
+
+<!-- Display Todos -->
+<table>
+    {% for cat in categories %}
+    <td>
+        <div class="card-panel blue-grey lighten-2 z-depth-2 white-text">
+            <h5 class="center">{{cat}}</h5>
+        </div>
+        <ul class="collapsible borderless popout">
             {% for todo in todos %}
-                {% if todo.todo_category == cat %}
-                    
-                        <li class="">
-                            <div class="collapsible-header blue-grey lighten-5 "><h5>{{todo.todo_name}}</h5></div>
-                            <div class="collapsible-body blue-grey lighten-5 black-text">{{todo.todo_details}}.</div>
-                        </li>
-                    
-                {% endif %}
+            {% if todo.todo_category == cat %}
+
+            <li class="">
+                <div class="collapsible-header blue-grey lighten-5 waves-teal ">
+                    <h5>{{todo.todo_name}}</h5>
+                </div>
+                <div class="collapsible-body blue-grey lighten-5 black-text">{{todo.todo_details}}.</div>
+            </li>
+
+            {% endif %}
             {% endfor %}
-            </ul>
-            </td>
-        {% endfor %}
-        </table>
-
-
-        
-        <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
         </ul>
-        </div>
-    {% else %}
-    
-        <!-- Prompt to Login it or Register! -->
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <a href="/login">
-                    <div class="card blue-grey lighten-2">
-                        <div class="card-content white-text">
-                        <span class="card-title center">Welcome to Dooly!</span>
-                        <p>Dooly is a todo app designed to help you get stuff done! To start using it
-                        login or register an account.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+    </td>
+    {% endfor %}
+</table>
 
-    {% endif %}
+
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue-grey">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    </ul>
+</div>
+{% else %}
+
+<!-- Prompt to Login it or Register! -->
+<div class="row">
+    <div class="col s8 offset-s2">
+        <a href="/login">
+            <div class="card blue-grey lighten-2">
+                <div class="card-content white-text">
+                    <span class="card-title center">Welcome to Dooly!</span>
+                    <p>Dooly is a todo app designed to help you get stuff done! To start using it
+                        login or register an account.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% endif %}
 {% endblock %}
