@@ -3,36 +3,49 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from .models import ToDo
+from .customforms import ToDoForm
+import time
 
 def index(request):
     if request.user.is_authenticated:
         currentuser = request.user.get_username()
+
+        ## Creating/Editing todos
+        if request.method == 'POST':
+            messages.success(request, "POST recieved!")
+            form = ToDoForm(request.POST, prefix='TodoForm')
+            messages.success(request, form.has_error)
+            if form.is_valid():
+                todo = form.save(commit=False)
+                todo.username = currentuser
+                todo.save(todo)
+
+                return redirect("main:index")
+        else:
+            form = ToDoForm()
+
+        ## Displaying todos
         usertodos = ToDo.objects.filter(username=currentuser)
         if usertodos is not None:
 
             categories = set()
 
             for task in usertodos.all():
-                categories.add(task.todo_category)
+                categories.add(task.category)
 
 
-            ## Render for users with todos ##
+            ## Todo Render ##
             return render(
                 request,
                 'main/index.html',
                 context = {
                     "todos":usertodos,
                     "categories":categories,
+                    "todoform":form,
                 }
             )
-        else:
-            ## Render for users to add todos ##
-            return render(
-                request,
-                'main/index.html'
-            )
 
-    ## Default Render for non Users ##
+    ## Default Render ##
     return render(
         request,
         'main/index.html'
