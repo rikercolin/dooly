@@ -25,7 +25,9 @@
                                 <h5 class><i class="fas fa-pen align-left"></i> {{todo.label}}</h5>
                             </div>
                             <div class="collapsible-body blue-grey lighten-5 black-text">
+                            <p class="overflow">
                                 {{todo.details}}
+                            <p>
                             </div>
                         </li>
 
@@ -38,8 +40,6 @@
             {% endfor %}
         </table>
     </main>
-
-
     <!-- Add Todo -->
     <section class="tools">
         <a class="waves-effect waves-teal blue-grey btn modal-trigger tooltipped" data-position="bottom"
