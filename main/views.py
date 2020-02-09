@@ -4,7 +4,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from .models import ToDo
 from .customforms import ToDoForm
-import time
+import time, math
 
 def index(request):
     if request.user.is_authenticated:
@@ -46,7 +46,7 @@ def index(request):
                 'main/index.html',
                 context = {
                     "todos":usertodos,
-                    "categories":categories,
+                    "categories":slice_list(list(categories)),
                     "todoform":form,
                 }
             )
@@ -104,3 +104,9 @@ def login_request(request):
             }
 
     )
+
+def slice_list(categories):
+    sliced_categories = []
+    for i in range(math.ceil((len(categories)) / 3)):
+        sliced_categories.append(categories[ (0 + (i * 3)) : (3 + (i * 3)) ])
+    return sliced_categories

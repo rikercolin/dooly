@@ -6,48 +6,58 @@
 {% if user.is_authenticated %}
 
 <!-- Display Todos -->
-<table>
-    {% for cat in categories %}
-    <td>
-        <div class="card-panel blue-grey lighten-2 z-depth-2 white-text">
-            <h5 class="center">{{cat}}</h5>
-        </div>
-        <ul class="collapsible borderless popout">
-            {% for todo in todos %}
-            {% if todo.category == cat %}
+<div class="grid-container">
+    <main>
+        <table>
+            {% for catlist in categories %}
+            <tr>
+                {% for cat in catlist %}
+                <td>
+                    <div class="card-panel blue-grey lighten-2 z-depth-2 white-text">
+                        <h5 class="center">{{cat}}</h5>
+                    </div>
+                    <ul class="collapsible borderless">
+                        {% for todo in todos %}
+                        {% if todo.category == cat %}
 
-            <li class="">
-                <div class="collapsible-header blue-grey lighten-5 waves-teal ">
-                    <h5>{{todo.label}}</h5>
-                </div>
-                <div class="collapsible-body blue-grey lighten-5 black-text">
-                    {{todo.details}}
-                </div>
-            </li>
+                        <li class="">
+                            <div class="collapsible-header blue-grey lighten-5">
+                                <h5 class><i class="fas fa-pen align-left"></i> {{todo.label}}</h5>
+                            </div>
+                            <div class="collapsible-body blue-grey lighten-5 black-text">
+                                {{todo.details}}
+                            </div>
+                        </li>
 
-            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </ul>
-    </td>
-    {% endfor %}
-</table>
+        </table>
+    </main>
 
 
-<!-- Add Todo -->
-<a class="waves-effect waves-teal blue-grey btn modal-trigger" href="#modal1">Create New Todo</a>
-
-<!-- Todo Form -->
-<div id="modal1" class="modal">
+    <!-- Add Todo -->
+    <section class="tools">
+        <a class="waves-effect waves-teal blue-grey btn modal-trigger tooltipped" data-position="bottom"
+            data-tooltip="Add a new Todo" href="#modal1"><i class="fas fa-plus"></i></a>
+    </section>
+    <!-- Todo Form -->
+    <div id="modal1" class="modal">
         <div class="modal-content">
             <h4>Create a Todo</h4>
             <form method="post">
-                    {% csrf_token %}
-                    {{todoform.as_p }}
-                    <button type="submit" class="btn">Create</button>
+                {% csrf_token %}
+                {{todoform.as_p }}
+                <button type="submit" class="btn">Create</button>
             </form>
         </div>
         <div class="modal-footer">
         </div>
+    </div>
 </div>
 {% else %}
 
