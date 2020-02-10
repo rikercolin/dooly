@@ -105,6 +105,15 @@ def login_request(request):
 
     )
 
+def account(request):
+    pass
+
+def demo(request):
+    pass
+
+def code(request):
+    return redirect("https://github.com/rikercolin/dooly")
+
 def slice_list(categories):
     sliced_categories = []
     for i in range(math.ceil((len(categories)) / 3)):

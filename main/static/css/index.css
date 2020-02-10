@@ -10,6 +10,24 @@ body {
     height: 100vh;
     margin: 1em;
 }
+.grid-login-register{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row: 100%;
+    margin: 1em;
+}
+
+.login{
+    grid-area: 1/2/2/2;
+    padding: 5px;
+    margin: 10px;
+}
+
+.register{
+    grid-area: 1 / 1 / 1 / 2;
+    padding: 5px;
+    margin: 10px;
+}
 
 main {
     grid-area: 1/2/2/2;

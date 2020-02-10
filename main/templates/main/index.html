@@ -52,7 +52,7 @@
             <form method="post">
                 {% csrf_token %}
                 {{todoform.as_p }}
-                <button type="submit" class="btn">Create</button>
+                <button type="submit" class="btn blue-grey">Create</button>
             </form>
         </div>
         <div class="modal-footer">
@@ -70,7 +70,18 @@
                     <h3 class="center">Welcome to Dooly!</h3>
                     <p>
                         Dooly is a todo app designed to help you get stuff done!
-                        To start using it login or register an account.
+                        To start using click me to login or register an account.
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="/demo">
+            <div class="card blue-grey lighten-2">
+                <div class="card-content white-text">
+                    <h3 class="center">Just want to try Dooly?</h3>
+                    <p>
+                        Click me and you can check out the demo mode.
+                        So you can get an idea about what dooly is!
                     </p>
                 </div>
             </div>
