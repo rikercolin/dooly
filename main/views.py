@@ -4,21 +4,23 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from .models import ToDo
 from .customforms import ToDoForm
-import time, math
+import time
+import math
+
 
 def index(request):
     if request.user.is_authenticated:
         currentuser = request.user.get_username()
 
-        ## Creating/Editing todos
+        # Creating/Editing todos
         if request.method == 'POST':
             form = ToDoForm(request.POST)
 
             data = {
-                'username':currentuser,
-                'label':form.data.get('label'),
-                'category':form.data.get('category'),
-                'details':form.data.get('details'),
+                'username': currentuser,
+                'label': form.data.get('label'),
+                'category': form.data.get('category'),
+                'details': form.data.get('details'),
             }
 
             form = ToDoForm(data)
@@ -30,7 +32,7 @@ def index(request):
         else:
             form = ToDoForm()
 
-        ## Displaying todos
+        # Displaying todos
         usertodos = ToDo.objects.filter(username=currentuser)
         if usertodos is not None:
 
@@ -39,15 +41,14 @@ def index(request):
             for task in usertodos.all():
                 categories.add(task.category)
 
-
             ## Todo Render ##
             return render(
                 request,
                 'main/index.html',
-                context = {
-                    "todos":usertodos,
-                    "categories":slice_list(list(categories)),
-                    "todoform":form,
+                context={
+                    "todos": usertodos,
+                    "categories": slice_list(list(categories)),
+                    "todoform": form,
                 }
             )
 
@@ -56,6 +57,7 @@ def index(request):
         request,
         'main/index.html'
     )
+
 
 def logout_request(request):
     logout(request)
@@ -90,7 +92,7 @@ def login_request(request):
                 messages.success(request, f"Your logged in as: {username}")
                 return redirect("main:index")
             else:
-                messages.error(request,"Bad Auth")
+                messages.error(request, "Bad Auth")
     else:
         loginform = AuthenticationForm(prefix='login')
 
@@ -99,23 +101,23 @@ def login_request(request):
         request,
         'main/login-register.html',
         context={
-            "registerform":registerform,
-            "loginform":loginform,
-            }
+            "registerform": registerform,
+            "loginform": loginform,
+        }
 
     )
 
-def account(request):
-    pass
 
 def demo(request):
     pass
 
+
 def code(request):
     return redirect("https://github.com/rikercolin/dooly")
+
 
 def slice_list(categories):
     sliced_categories = []
     for i in range(math.ceil((len(categories)) / 3)):
-        sliced_categories.append(categories[ (0 + (i * 3)) : (3 + (i * 3)) ])
+        sliced_categories.append(categories[(0 + (i * 3)): (3 + (i * 3))])
     return sliced_categories

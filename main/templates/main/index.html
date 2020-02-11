@@ -14,20 +14,30 @@
                 {% for cat in catlist %}
                 <td>
                     <div class="card-panel blue-grey lighten-2 z-depth-2 white-text">
+                        {% if cat == "none"%}
+                        <h5 class="center">General</h5>
+                        {% else %}
                         <h5 class="center">{{cat}}</h5>
+                        {% endif %}
                     </div>
                     <ul class="collapsible borderless">
                         {% for todo in todos %}
                         {% if todo.category == cat %}
 
-                        <li class="">
+                        <li>
                             <div class="collapsible-header blue-grey lighten-5">
-                                <h5 class><i class="fas fa-pen align-left"></i> {{todo.label}}</h5>
+                                <h5 class>{{todo.label}}</h5>
                             </div>
-                            <div class="collapsible-body blue-grey lighten-5 black-text">
-                            <p class="overflow">
-                                {{todo.details}}
-                            <p>
+                            <div class="collapsible-body blue-grey lighten-5 black-text visible">
+                                <p class="overflow">
+                                    {{todo.details}}
+                                <p>
+                                <div class="blue-grey lighten-5 hidden right-align">
+                                    <a class="waves-effect waves-teal blue-grey btn modal-trigger tooltipped" data-position="bottom"
+                                    data-tooltip="Edit" href="#modaledit"><i class="fas fa-pen fa-lg"></i></a>
+                                    <a class="waves-effect waves-teal blue-grey btn modal-trigger tooltipped" data-position="bottom"
+                                    data-tooltip="Delete" href="#modaldelete"><i class="fas fa-trash-alt fa-lg"></i></a>
+                                </div>
                             </div>
                         </li>
 
@@ -43,12 +53,38 @@
     <!-- Add Todo -->
     <section class="tools">
         <a class="waves-effect waves-teal blue-grey btn modal-trigger tooltipped" data-position="bottom"
-            data-tooltip="Add a new Todo" href="#modal1"><i class="fas fa-plus"></i></a>
+            data-tooltip="Add a new Todo" href="#modalnew"><i class="fas fa-plus fa-lg"></i></a>
     </section>
     <!-- Todo Form -->
-    <div id="modal1" class="modal">
+    <div id="modalnew" class="modal">
         <div class="modal-content">
             <h4>Create a Todo</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{todoform.as_p }}
+                <button type="submit" class="btn blue-grey">Create</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+
+    <div id="modaledit" class="modal">
+        <div class="modal-content">
+            <h4>Edit a Todo</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{todoform.as_p }}
+                <button type="submit" class="btn blue-grey">Create</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+
+    <div id="modaldelete" class="modal">
+        <div class="modal-content">
+            <h4>You sure you want to delete this?</h4>
             <form method="post">
                 {% csrf_token %}
                 {{todoform.as_p }}
